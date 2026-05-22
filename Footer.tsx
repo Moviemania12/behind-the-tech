@@ -1,3 +1,4 @@
+"use client";
 import { Zap, Youtube, Instagram, Linkedin, Mail, ArrowUpRight } from "lucide-react";
 
 const footerLinks = {
