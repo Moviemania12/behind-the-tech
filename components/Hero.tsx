@@ -1,5 +1,4 @@
 "use client";
-"use client";
 import { useEffect, useRef } from "react";
 import { ChevronDown, Play } from "lucide-react";
 
