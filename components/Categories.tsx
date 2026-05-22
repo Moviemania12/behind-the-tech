@@ -1,5 +1,4 @@
 "use client";
-"use client";
 import { useEffect, useRef } from "react";
 import { Database, Cpu, Zap, Rocket, Building2, Server, ArrowRight } from "lucide-react";
 
