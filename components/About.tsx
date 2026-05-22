@@ -1,4 +1,5 @@
 "use client";
+"use client";
 import { useEffect, useRef } from "react";
 import { Database, Cpu, Zap, Bot, Building2, Wifi, Server, FlaskConical } from "lucide-react";
 
