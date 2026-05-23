@@ -34,7 +34,7 @@ export default function About() {
   }, []);
 
   return (
-    <section id="about" ref={sectionRef} className="relative py-32 px-6 overflow-hidden">
+    <section id="about" ref={sectionRef} className="relative py-20 sm:py-24 lg:py-32 px-6 overflow-hidden">
       {/* Background glow */}
       <div className="absolute top-1/2 left-0 w-[500px] h-[500px] -translate-y-1/2 -translate-x-1/2 rounded-full pointer-events-none"
         style={{ background: "radial-gradient(circle, rgba(255,34,68,0.04) 0%, transparent 70%)" }} />

@@ -33,7 +33,7 @@ export default function Newsletter() {
   };
 
   return (
-    <section id="newsletter" ref={sectionRef} className="relative py-32 px-6 overflow-hidden">
+    <section id="newsletter" ref={sectionRef} className="relative py-20 sm:py-24 lg:py-32 px-6 overflow-hidden">
       {/* Decorative bg */}
       <div className="absolute inset-0"
         style={{ background: "linear-gradient(var(--color-void), var(--color-abyss) 50%, var(--color-void))" }} />

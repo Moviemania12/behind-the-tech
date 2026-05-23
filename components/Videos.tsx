@@ -139,7 +139,7 @@ export default function Videos() {
   }, []);
 
   return (
-    <section id="videos" ref={sectionRef} className="relative py-32 px-6 overflow-hidden"
+    <section id="videos" ref={sectionRef} className="relative py-20 sm:py-24 lg:py-32 px-6 overflow-hidden"
       style={{ background: "linear-gradient(var(--color-void), var(--color-abyss), var(--color-void))" }}>
 
       <div className="max-w-7xl mx-auto">

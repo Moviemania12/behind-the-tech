@@ -38,7 +38,7 @@ export default function Contact() {
     "w-full px-5 py-4 bg-[var(--color-panel)] border border-[rgba(0,212,255,0.15)] text-[var(--color-text-primary)] placeholder-[var(--color-text-muted)] focus:outline-none focus:border-[var(--color-neon-blue)] focus:bg-[rgba(0,212,255,0.04)] transition-all text-sm";
 
   return (
-    <section id="contact" ref={sectionRef} className="relative py-32 px-6 overflow-hidden">
+    <section id="contact" ref={sectionRef} className="relative py-20 sm:py-24 lg:py-32 px-6 overflow-hidden">
       <div className="absolute top-0 left-0 right-0 tech-line" />
 
       <div className="max-w-6xl mx-auto">

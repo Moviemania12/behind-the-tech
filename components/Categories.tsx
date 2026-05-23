@@ -98,7 +98,7 @@ export default function Categories() {
   }, []);
 
   return (
-    <section id="categories" ref={sectionRef} className="relative py-32 px-6 overflow-hidden">
+    <section id="categories" ref={sectionRef} className="relative py-20 sm:py-24 lg:py-32 px-6 overflow-hidden">
       {/* Top divider */}
       <div className="tech-line mb-0" />
 
