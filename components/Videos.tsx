@@ -2,6 +2,8 @@
 import { useEffect, useRef } from "react";
 import { Play, Clock, Eye, Youtube } from "lucide-react";
 
+const CHANNEL_URL = "https://youtube.com/@behindthetech";
+
 const videos = [
   {
     title: "Inside Google's $1 Billion Data Center",
@@ -9,6 +11,7 @@ const videos = [
     duration: "18:42",
     views: "2.4M",
     thumb: "https://images.unsplash.com/photo-1558494949-ef010cbdcc31?w=800&q=80",
+    url: CHANNEL_URL,
     featured: true,
   },
   {
@@ -17,6 +20,7 @@ const videos = [
     duration: "24:15",
     views: "1.8M",
     thumb: "https://images.unsplash.com/photo-1591799264318-7e6ef8ddb7ea?w=800&q=80",
+    url: CHANNEL_URL,
     featured: false,
   },
   {
@@ -25,6 +29,7 @@ const videos = [
     duration: "21:30",
     views: "1.2M",
     thumb: "https://images.unsplash.com/photo-1518770660439-4636190af475?w=800&q=80",
+    url: CHANNEL_URL,
     featured: false,
   },
   {
@@ -33,6 +38,7 @@ const videos = [
     duration: "16:55",
     views: "980K",
     thumb: "https://images.unsplash.com/photo-1551808525-51a94da548ce?w=800&q=80",
+    url: CHANNEL_URL,
     featured: false,
   },
   {
@@ -41,6 +47,7 @@ const videos = [
     duration: "19:10",
     views: "3.1M",
     thumb: "https://images.unsplash.com/photo-1544197150-b99a580bb7a8?w=800&q=80",
+    url: CHANNEL_URL,
     featured: false,
   },
   {
@@ -49,6 +56,7 @@ const videos = [
     duration: "22:45",
     views: "756K",
     thumb: "https://images.unsplash.com/photo-1473341304170-971dccb5ac1e?w=800&q=80",
+    url: CHANNEL_URL,
     featured: false,
   },
 ];
@@ -63,8 +71,12 @@ function VideoCard({
   featured?: boolean;
 }) {
   return (
-    <div
-      className={`reveal glass card-hover group cursor-pointer overflow-hidden ${
+    <a
+      href={video.url}
+      target="_blank"
+      rel="noopener noreferrer"
+      aria-label={`Watch: ${video.title}`}
+      className={`reveal glass card-hover group cursor-pointer overflow-hidden block ${
         featured ? "md:col-span-2 md:row-span-1" : ""
       }`}
       style={{ transitionDelay: `${index * 80}ms` }}
@@ -114,7 +126,7 @@ function VideoCard({
           <span className="flex items-center gap-1.5"><Clock size={11} /> {video.duration}</span>
         </div>
       </div>
-    </div>
+    </a>
   );
 }
 

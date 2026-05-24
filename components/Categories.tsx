@@ -2,6 +2,8 @@
 import { useEffect, useRef } from "react";
 import { Database, Cpu, Zap, Rocket, Building2, Server, ArrowRight } from "lucide-react";
 
+const CHANNEL_URL = "https://youtube.com/@behindthetech";
+
 const categories = [
   {
     icon: Database,
@@ -14,6 +16,7 @@ const categories = [
     border: "border-[rgba(0,212,255,0.2)]",
     glowColor: "rgba(0,212,255,0.3)",
     tag: "MOST WATCHED",
+    url: `${CHANNEL_URL}/search?query=data+center`,
   },
   {
     icon: Cpu,
@@ -26,6 +29,7 @@ const categories = [
     border: "border-[rgba(255,34,68,0.2)]",
     glowColor: "rgba(255,34,68,0.3)",
     tag: "TRENDING",
+    url: `${CHANNEL_URL}/search?query=AI+systems`,
   },
   {
     icon: Zap,
@@ -38,6 +42,7 @@ const categories = [
     border: "border-[rgba(0,212,255,0.15)]",
     glowColor: "rgba(0,212,255,0.2)",
     tag: null,
+    url: `${CHANNEL_URL}/search?query=electrical+engineering`,
   },
   {
     icon: Rocket,
@@ -50,6 +55,7 @@ const categories = [
     border: "border-[rgba(0,255,204,0.15)]",
     glowColor: "rgba(0,255,204,0.2)",
     tag: "NEW",
+    url: `${CHANNEL_URL}/search?query=future+tech`,
   },
   {
     icon: Building2,
@@ -62,6 +68,7 @@ const categories = [
     border: "border-[rgba(0,212,255,0.12)]",
     glowColor: "rgba(0,212,255,0.15)",
     tag: null,
+    url: `${CHANNEL_URL}/search?query=smart+infrastructure`,
   },
   {
     icon: Server,
@@ -74,6 +81,7 @@ const categories = [
     border: "border-[rgba(255,34,68,0.15)]",
     glowColor: "rgba(255,34,68,0.2)",
     tag: null,
+    url: `${CHANNEL_URL}/search?query=server+technology`,
   },
 ];
 
@@ -126,9 +134,13 @@ export default function Categories() {
           {categories.map((cat, i) => {
             const Icon = cat.icon;
             return (
-              <div
+              <a
                 key={cat.title}
-                className={`reveal glass card-hover group cursor-pointer relative overflow-hidden border ${cat.border}`}
+                href={cat.url}
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label={`Explore ${cat.title} videos`}
+                className={`reveal glass card-hover group cursor-pointer relative overflow-hidden border block ${cat.border}`}
                 style={{
                   transitionDelay: `${i * 80}ms`,
                   "--glow": cat.glowColor,
@@ -188,7 +200,7 @@ export default function Categories() {
                     </div>
                   </div>
                 </div>
-              </div>
+              </a>
             );
           })}
         </div>
