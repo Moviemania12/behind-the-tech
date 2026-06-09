@@ -5,63 +5,89 @@ import { Server, Wifi, Brain, Zap } from "lucide-react";
 const stats = [
   {
     icon: Server,
-    value: 2400000,
-    display: "2.4M+",
+    target: 2.4,
+    decimals: 1,
+    prefix: "",
+    suffix: "M+",
     label: "Servers Documented",
-    suffix: "+",
     color: "blue",
     desc: "Physical servers across hyperscale facilities",
   },
   {
     icon: Wifi,
-    value: 847,
-    display: "847 PB",
-    label: "Data Flow Analyzed",
+    target: 847,
+    decimals: 0,
+    prefix: "",
     suffix: " PB",
+    label: "Data Flow Analyzed",
     color: "red",
     desc: "Petabytes of network traffic studied",
   },
   {
     icon: Brain,
-    value: 10000,
-    display: "10K+",
+    target: 10,
+    decimals: 0,
+    prefix: "",
+    suffix: "K+",
     label: "AI Systems Profiled",
-    suffix: "+",
     color: "cyan",
     desc: "Machine learning infrastructure units",
   },
   {
     icon: Zap,
-    value: 12400,
-    display: "12.4 GW",
-    label: "Power Infrastructure",
+    target: 12.4,
+    decimals: 1,
+    prefix: "",
     suffix: " GW",
+    label: "Power Infrastructure",
     color: "blue",
     desc: "Gigawatts of data center power capacity",
   },
 ];
 
-function Counter({ target, isVisible }: { target: number; isVisible: boolean }) {
-  const [count, setCount] = useState(0);
+function Counter({
+  target,
+  decimals,
+  prefix,
+  suffix,
+  isVisible,
+}: {
+  target: number;
+  decimals: number;
+  prefix: string;
+  suffix: string;
+  isVisible: boolean;
+}) {
+  const [value, setValue] = useState(0);
 
   useEffect(() => {
     if (!isVisible) return;
     const duration = 2000;
-    const step = target / (duration / 16);
-    let current = 0;
-    const timer = setInterval(() => {
-      current += step;
-      if (current >= target) {
-        setCount(target);
-        clearInterval(timer);
-      } else {
-        setCount(Math.floor(current));
-      }
-    }, 16);
-    return () => clearInterval(timer);
+    const start = performance.now();
+    let raf = 0;
+    const tick = (now: number) => {
+      const t = Math.min(1, (now - start) / duration);
+      // ease-out for a nicer feel than linear
+      const eased = 1 - Math.pow(1 - t, 3);
+      setValue(eased * target);
+      if (t < 1) raf = requestAnimationFrame(tick);
+    };
+    raf = requestAnimationFrame(tick);
+    return () => cancelAnimationFrame(raf);
   }, [isVisible, target]);
 
-  return <>{count.toLocaleString()}</>;
+  const formatted = value.toLocaleString(undefined, {
+    minimumFractionDigits: decimals,
+    maximumFractionDigits: decimals,
+  });
+
+  return (
+    <>
+      {prefix}
+      {formatted}
+      {suffix}
+    </>
+  );
 }
 
 export default function Stats() {
@@ -85,7 +111,7 @@ export default function Stats() {
   }, []);
 
   return (
-    <section id="stats" ref={sectionRef} className="relative py-32 px-6 overflow-hidden">
+    <section id="stats" ref={sectionRef} className="relative py-20 sm:py-24 lg:py-32 px-6 overflow-hidden">
       {/* Grid bg */}
       <div className="absolute inset-0 grid-bg opacity-40" />
 
@@ -139,14 +165,17 @@ export default function Stats() {
                   </div>
 
                   {/* Counter */}
-                  <div className="text-4xl lg:text-5xl font-bold mb-2 tracking-tight"
+                  <div className="text-4xl lg:text-5xl font-bold mb-2 tracking-tight tabular-nums"
                     style={{ fontFamily: "var(--font-display)", color: c.text }}>
-                    {stat.display.replace(/[\d.]+/, "")}
-                    <Counter target={stat.value} isVisible={isVisible} />
-                    {stat.suffix}
+                    <Counter
+                      target={stat.target}
+                      decimals={stat.decimals}
+                      prefix={stat.prefix}
+                      suffix={stat.suffix}
+                      isVisible={isVisible}
+                    />
                   </div>
 
-                  {/* Actually show the display stat for non-animatable ones */}
                   <div className="text-sm font-bold text-[var(--color-text-primary)] mb-2 tracking-wide">
                     {stat.label}
                   </div>
